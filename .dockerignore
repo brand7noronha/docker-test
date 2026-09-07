@@ -7,3 +7,4 @@ venv
 .git
 .gitignore
 instance/
+vm-setup-script.sh
