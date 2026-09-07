@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>{{ product['name'] }}</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>Product Details</h1>
+
+    <a href="{{ url_for('cart') }}">
+        🛒 Cart
+    </a>
+
+</header>
+
+
+<main>
+
+    <div class="product-details">
+
+        <img
+            src="{{ product['image'] }}"
+            alt="{{ product['name'] }}"
+        >
+
+        <div>
+
+            <h2>
+                {{ product['name'] }}
+            </h2>
+
+            <p>
+                {{ product['description'] }}
+            </p>
+
+            <h3>
+                ₹{{ "%.2f"|format(product['price']) }}
+            </h3>
+
+            <a
+                class="button"
+                href="{{ url_for(
+                    'add_to_cart',
+                    product_id=product['id']
+                ) }}"
+            >
+                Add to Cart
+            </a>
+
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+</html>

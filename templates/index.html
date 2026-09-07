@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple eCommerce</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+<header>
+
+    <h1>Simple eCommerce Store</h1>
+
+    <a href="{{ url_for('cart') }}">
+        🛒 View Cart
+    </a>
+
+</header>
+
+
+<main>
+
+    <h2>Products</h2>
+
+
+    <!-- SEARCH -->
+
+    <form method="GET" action="{{ url_for('index') }}">
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search products..."
+            value="{{ search }}"
+        >
+
+        <button type="submit">
+            Search
+        </button>
+
+    </form>
+
+
+    <div class="products">
+
+        {% for product in products %}
+
+        <div class="product-card">
+
+            <img
+                src="{{ product['image'] }}"
+                alt="{{ product['name'] }}"
+            >
+
+            <h3>
+                {{ product['name'] }}
+            </h3>
+
+            <p>
+                {{ product['description'] }}
+            </p>
+
+            <p class="price">
+                ₹{{ "%.2f"|format(product['price']) }}
+            </p>
+
+            <a href="{{ url_for(
+                'product',
+                product_id=product['id']
+            ) }}">
+                View Product
+            </a>
+
+        </div>
+
+        {% else %}
+
+        <p>No products found.</p>
+
+        {% endfor %}
+
+    </div>
+
+</main>
+
+<script
+    src="{{ url_for('static', filename='script.js') }}">
+</script>
+
+</body>
+
+</html>
+

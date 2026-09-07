@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Checkout</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>Checkout</h1>
+
+</header>
+
+
+<main>
+
+    <h2>
+        Total Amount:
+        ₹{{ "%.2f"|format(total) }}
+    </h2>
+
+
+    <form
+        method="POST"
+        action="{{ url_for('payment') }}"
+    >
+
+        <label>
+            Name
+        </label>
+
+        <br>
+
+        <input
+            type="text"
+            name="name"
+            required
+        >
+
+        <br><br>
+
+
+        <label>
+            Email
+        </label>
+
+        <br>
+
+        <input
+            type="email"
+            name="email"
+            required
+        >
+
+        <br><br>
+
+
+        <button type="submit">
+            Pay Now
+        </button>
+
+    </form>
+
+</main>
+
+</body>
+</html>

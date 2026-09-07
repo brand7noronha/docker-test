@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Shopping Cart</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>Shopping Cart</h1>
+
+    <a href="{{ url_for('index') }}">
+        Continue Shopping
+    </a>
+
+</header>
+
+
+<main>
+
+    {% if products %}
+
+        {% for item in products %}
+
+        <div class="cart-item">
+
+            <img
+                src="{{ item['product']['image'] }}"
+                alt="{{ item['product']['name'] }}"
+            >
+
+            <div>
+
+                <h3>
+                    {{ item['product']['name'] }}
+                </h3>
+
+                <p>
+                    Quantity:
+                    {{ item['quantity'] }}
+                </p>
+
+                <p>
+                    Price:
+                    ₹{{ "%.2f"|format(item['product']['price']) }}
+                </p>
+
+                <p>
+                    Subtotal:
+                    ₹{{ "%.2f"|format(item['subtotal']) }}
+                </p>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+
+        <h2>
+            Total:
+            ₹{{ "%.2f"|format(total) }}
+        </h2>
+
+
+        <a
+            class="button"
+            href="{{ url_for('checkout') }}"
+        >
+            Buy / Checkout
+        </a>
+
+    {% else %}
+
+        <h2>Your cart is empty.</h2>
+
+        <a href="{{ url_for('index') }}">
+            Start Shopping
+        </a>
+
+    {% endif %}
+
+</main>
+
+</body>
+</html>
